@@ -1,5 +1,7 @@
 import express from "express";
 const app = express();
+import mongoose from "mongoose";
+import Game from "./models/Games.js";
 
 //Configurações do Express
 app.use(express.urlencoded({ extended: false }));
@@ -32,6 +34,8 @@ app.get("/", (req, res) => {
   ];
   res.json(games);
 });
+//Conexão com o banco de dados MongoDB
+mongoose.connect("mongodb://127.0.0.1:27017/api-thegames");
 
 const port = 4000;
 app.listen(port, (error) => {

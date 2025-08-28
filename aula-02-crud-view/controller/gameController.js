@@ -37,4 +37,22 @@ const deleteGame = async (req, res) => {
     res.status(500).json({ error: "Erro interno no servidor" });
   }
 };
-export default { getAllGames, createNewGame, deleteGame };
+
+const updateGame = async (req, res) => {
+  try {
+    if (ObjectId.isValid(req.params.id)) {
+      const id = req.params.id;
+      const { title, year, genre, platform, price } = req.body;
+      await gameServices.UpdateGame(id, title, year, genre, platform, price);
+      res.sendStatus(200); // Código 200 (OK)
+    } else {
+      res.status(400).json({ error: "A ID enviada é inválida!" });
+      // Código 400 (BAD REQUEST) Requisição mal formada.
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Erro interno no servidor" });
+  }
+};
+
+export default { getAllGames, createNewGame, deleteGame, updateGame };

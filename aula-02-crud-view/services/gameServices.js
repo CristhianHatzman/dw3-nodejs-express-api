@@ -31,7 +31,21 @@ class gameService {
   async DeleteGame(id) {
     try {
       await Game.findByIdAndDelete(id);
-      console.log(`Game com ${id} foi deletado.`)
+      console.log(`Game com ${id} foi deletado.`);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async UpdateGame(id, title, year, genre, platform, price) {
+    try {
+      await Game.findByIdAndUpdate(id, {
+        title,
+        year,
+        genre,
+        platform,
+        price,
+      });
     } catch (error) {
       console.log(error);
     }

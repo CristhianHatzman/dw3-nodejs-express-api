@@ -27,5 +27,14 @@ class gameService {
       console.log(error);
     }
   }
+
+  async DeleteGame(id) {
+    try {
+      await Game.findByIdAndDelete(id);
+      console.log(`Game com ${id} foi deletado.`)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 export default new gameService();
